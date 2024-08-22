@@ -1,0 +1,13 @@
+--- /opt/conda/envs/my/lib/python3.8/site-packages/torch/utils/cpp_extension.py.bak	2024-08-22 06:34:30.653579551 -0700
++++ /opt/conda/envs/my/lib/python3.8/site-packages/torch/utils/cpp_extension.py	2024-08-22 06:51:57.574629624 -0700
+@@ -1726,6 +1726,10 @@
+             if 'arch' in flag:
+                 return []
+ 
++    flags = []
++    flags.append(f'-gencode=arch=compute_86,code=sm_86')
++    return sorted(set(flags))        
++
+     # Note: keep combined names ("arch1+arch2") above single names, otherwise
+     # string replacement may not do the right thing
+     named_arches = collections.OrderedDict([

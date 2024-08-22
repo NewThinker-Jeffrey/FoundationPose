@@ -1,4 +1,6 @@
-FROM nvidia/cudagl:11.3.0-devel-ubuntu20.04
+#FROM nvidia/cudagl:11.3.0-devel-ubuntu20.04
+#FROM nvidia/cuda:11.4.3-cudnn8-devel-ubuntu20.04
+FROM cuda.xfce.vnc
 
 ENV TZ=US/Pacific
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
@@ -58,3 +60,9 @@ RUN conda activate my &&\
 
 ENV SHELL=/bin/bash
 RUN ln -sf /bin/bash /bin/sh
+
+
+ADD foundationpose_cpp_extension.py.patch /tmp/
+ADD patch_foundationpose.sh  /tmp/
+RUN cd /tmp && bash patch_foundationpose.sh  
+
